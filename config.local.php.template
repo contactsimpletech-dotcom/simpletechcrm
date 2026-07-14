@@ -1,0 +1,30 @@
+<?php
+/**
+ * WebPSA local configuration.
+ * The installer writes this file. You may edit it later to change settings.
+ */
+
+// ── Database (from your cPanel MySQL setup) ──────────────────────────────────
+define('BH_DB_HOST',    '__DB_HOST__');
+define('BH_DB_PORT',    '__DB_PORT__');     // blank = default (3306)
+define('BH_DB_SOCKET',  '__DB_SOCKET__');   // set instead of host for a unix socket
+define('BH_DB_NAME',    '__DB_NAME__');
+define('BH_DB_USER',    '__DB_USER__');
+define('BH_DB_PASS',    '__DB_PASS__');
+define('BH_DB_CHARSET', 'utf8mb4');
+
+// ── Application ──────────────────────────────────────────────────────────────
+define('BH_APP_NAME', '__APP_NAME__');
+define('BH_APP_URL',  '__APP_URL__');      // e.g. https://psa.yourdomain.com
+define('BH_TIMEZONE', '__TIMEZONE__');     // e.g. America/Chicago
+
+// ── Security: unique 64-hex-char key, generated at install ───────────────────
+define('BH_ENCRYPTION_KEY', '__ENC_KEY__');
+
+// ── Outbound email (optional — set via Settings later, or here) ──────────────
+define('BH_MAIL_FROM',       '__MAIL_FROM__');
+define('BH_MAIL_SMTP_HOST',  '');
+define('BH_MAIL_SMTP_PORT',  587);
+define('BH_MAIL_SMTP_USER',  '');
+define('BH_MAIL_SMTP_PASS',  '');
+

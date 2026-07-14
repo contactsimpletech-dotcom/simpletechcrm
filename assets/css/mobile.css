@@ -1,0 +1,311 @@
+/* ════════════════════════════════════════════════════════════════════════════
+ * WebPSA mobile pass v1
+ * ════════════════════════════════════════════════════════════════════════════
+ * Loaded after app.css. Targets pages that are "too wide" on mobile by:
+ *  - Forcing tables to scroll horizontally inside their card (not the page)
+ *  - Collapsing multi-column form grids to single column
+ *  - Reducing padding/margins
+ *  - Capping content widths at 100%
+ *  - Hiding less-critical columns on small screens (helper class)
+ * ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Universal box guard — nothing extends past viewport ──────────────────── */
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden !important; }
+  body, .main-wrapper, .page-content, .content-wrapper, main {
+    max-width: 100vw !important;
+    overflow-x: hidden;
+  }
+
+  /* ── Page padding tightened up ─────────────────────────────────────────── */
+  .page-content, .content, main, .main-wrapper {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* ── Cards / panels span full width ────────────────────────────────────── */
+  .card, .panel, .pfx-card, .data-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 8px !important;
+  }
+  .card-body, .panel-body, .pfx-card-body { padding: 14px !important; }
+  .card-header { padding: 12px 14px !important; }
+
+  /* ── ALL tables scroll inside their card — never overflow the page ─────── */
+  .card table, .panel table, table.table, table.data-table, .table-wrap > table {
+    min-width: 100%;
+    width: max-content;
+  }
+  .card, .panel, .pfx-card, .table-wrap, .table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Don't let inner table cells wrap/break to ridiculous widths */
+  table th, table td { white-space: nowrap; }
+
+  /* ── Multi-column form grids collapse to one column ────────────────────── */
+  .form-grid, .form-row, .row, .grid-2, .grid-3, .grid-4,
+  [style*="grid-template-columns"] {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+  }
+  .col, .col-md-6, .col-md-4, .col-md-3, .col-sm-6 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    margin-bottom: 12px;
+  }
+
+  /* ── Form controls full-width, comfortable tap target ──────────────────── */
+  .form-control, input[type=text], input[type=email], input[type=password],
+  input[type=number], input[type=tel], input[type=url], input[type=date],
+  input[type=time], input[type=search], select, textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 42px;
+    font-size: 15px;
+  }
+
+  /* ── Buttons get min tap height ────────────────────────────────────────── */
+  .btn, button.btn, a.btn { min-height: 40px; padding: 10px 14px; font-size: 14px; }
+  .btn-sm { min-height: 36px; padding: 8px 12px; }
+
+  /* ── Stack action button rows ──────────────────────────────────────────── */
+  .form-actions, .btn-row, .action-buttons {
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-actions .btn, .btn-row .btn { width: 100%; }
+
+  /* ── Page title area ───────────────────────────────────────────────────── */
+  .page-title-area { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 0; }
+  .page-title-area h1 { font-size: 18px !important; }
+
+  /* ── Modal — full screen, near edge ────────────────────────────────────── */
+  .modal-dialog, .pfx-modal-dialog, [role="dialog"] {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    height: 100vh;
+  }
+  .modal-content, .pfx-modal-content {
+    border-radius: 0 !important;
+    min-height: 100vh;
+  }
+  .modal-body { padding: 14px !important; }
+
+  /* ── Settings sidebar — stack above content on mobile ──────────────────── */
+  .settings-layout, .settings-wrapper {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+  .settings-sidebar, .settings-nav { width: 100% !important; margin-bottom: 16px; }
+
+  /* ── Hide "Tools-only" / verbose columns on phones ─────────────────────── */
+  .hide-mobile, .d-none-mobile, .desktop-only { display: none !important; }
+
+  /* ── Inline grids of cards (Settings tools, dashboards) ────────────────── */
+  [style*="grid-template-columns:repeat(auto-fill"],
+  [style*="grid-template-columns: repeat(auto-fill"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Header polish — tighter on mobile ─────────────────────────────────── */
+  .header-search { display: none !important; }
+  .header-breadcrumb { display: none !important; }
+  #perfex-header { padding: 0 8px !important; }
+
+  /* ── Sidebar narrower so content has room when open ────────────────────── */
+  body.sidebar-mobile-open #perfex-sidebar {
+    width: min(85vw, 280px) !important;
+  }
+
+  /* ── Pre / code blocks scroll ──────────────────────────────────────────── */
+  pre, code { max-width: 100%; overflow-x: auto; }
+
+  /* ── Images scale ──────────────────────────────────────────────────────── */
+  img { max-width: 100%; height: auto; }
+}
+
+/* ── Extra-tight on very small phones ───────────────────────────────────── */
+@media (max-width: 480px) {
+  .page-content, .content, main { padding-left: 8px !important; padding-right: 8px !important; }
+  .card-body, .panel-body { padding: 10px !important; }
+  .page-title-area h1 { font-size: 16px !important; }
+}
+/* ════════════════════════════════════════════════════════════════════════════
+ * WebPSA mobile pass v2 — targeted fixes (append to mobile.css)
+ * Issues fixed:
+ *   1. Invoice detail — meta right-col + line items table overflow
+ *   2. Ticket detail — right sidebar must stack below main content
+ *   3. Tuesday/Projects — header card email overflow, hero card clipping
+ * ════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── 1. INVOICE DETAIL ──────────────────────────────────────────────────── */
+
+  /* The invoice preview wrapper — force contained */
+  .invoice-preview, .invoice-wrapper, .invoice-container,
+  #invoice-preview, #invoice-wrap {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Invoice header: company address left + meta right — stack them */
+  .invoice-header, .inv-header, .invoice-top {
+    display: block !important;
+    width: 100% !important;
+  }
+  .invoice-header-left, .inv-from, .invoice-from,
+  .invoice-header-right, .inv-meta, .invoice-meta {
+    width: 100% !important;
+    text-align: left !important;
+    display: block !important;
+    float: none !important;
+  }
+  .invoice-header-right, .inv-meta, .invoice-meta {
+    margin-top: 12px;
+  }
+
+  /* Invoice meta table (Invoice #, Date, Currency rows) */
+  .invoice-meta table, .inv-meta table,
+  table.invoice-info, .invoice-details-table {
+    width: 100% !important;
+    min-width: unset !important;
+  }
+  .invoice-meta td, .inv-meta td,
+  table.invoice-info td, .invoice-details-table td {
+    white-space: normal !important;
+    word-break: break-word;
+  }
+
+  /* Line items table — scroll inside card */
+  .invoice-items, .invoice-lines, .line-items-table,
+  .invoice-preview table, .invoice-wrapper table {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    width: 100% !important;
+  }
+
+  /* Right-align totals block — keep readable but contained */
+  .invoice-totals, .inv-totals, .invoice-summary {
+    width: 100% !important;
+    text-align: right !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ── 2. TICKET DETAIL — sidebar stacks below ────────────────────────────── */
+
+  /* Two-col layout wrapper */
+  .ticket-detail-layout, .ticket-layout, .ticket-wrapper,
+  .ticket-detail-wrapper, #ticket-detail {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Main content pane */
+  .ticket-main, .ticket-body, .ticket-content,
+  .ticket-detail-main, #ticket-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+  }
+
+  /* Sidebar — comes after main, full width */
+  .ticket-sidebar, .ticket-meta-sidebar, .ticket-detail-sidebar,
+  #ticket-sidebar, .ticket-right-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    margin-top: 16px !important;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 14px !important;
+  }
+
+  /* Sidebar meta rows (Status, Priority, Due, Billing) — make them flex row pairs */
+  .ticket-sidebar .meta-row, .ticket-meta-row,
+  .ticket-sidebar .field-row {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .ticket-sidebar .meta-label, .ticket-sidebar label {
+    font-weight: 600;
+    color: #6b7280;
+    font-size: 12px;
+    min-width: 90px;
+  }
+
+  /* Checklist/Timesheets/Notes tab strip — ensure it doesn't overflow */
+  .ticket-tabs, .ticket-tab-nav, .ticket-tab-strip {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap !important;
+    display: flex !important;
+  }
+  .ticket-tabs .tab, .ticket-tab-nav .tab,
+  .ticket-tab-strip .tab, .ticket-tab-strip li {
+    flex-shrink: 0 !important;
+  }
+
+  /* ── 3. TUESDAY / PROJECTS — header card overflow ───────────────────────── */
+
+  /* Project hero card (purple gradient header) */
+  .project-hero, .project-header-card, .tuesday-project-header,
+  .project-detail-header, #project-header {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Email address (the long proj+...@... string) */
+  .project-email, .project-inbox-email, .proj-email,
+  .project-hero .email, .project-header-card .email {
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    font-size: 11px !important;
+    max-width: 100% !important;
+  }
+
+  /* Catch-all for any long email-looking string inside the purple card */
+  .project-hero [href^="mailto:"],
+  .project-hero span, .project-header-card span {
+    word-break: break-all !important;
+    max-width: 100% !important;
+  }
+
+  /* Project meta pills row (Active, On Track) — wrap instead of overflow */
+  .project-status-row, .project-meta-row, .project-pills {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  /* Project action buttons (Edit, Progress, Client view, Unshare, Invoice) */
+  .project-actions, .project-btn-row, .tuesday-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .project-actions .btn, .project-btn-row .btn, .tuesday-actions .btn {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    white-space: nowrap;
+  }
+
+  /* Stats mini-cards (HOURS LOGGED / UNBILLED / INVOICED / BUDGET) — already 2-col, keep it */
+  .project-stats-grid, .tuesday-stats, .project-kpi-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+} /* end @media 768px */
