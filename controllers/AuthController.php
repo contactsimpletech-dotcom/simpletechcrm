@@ -149,7 +149,7 @@ class AuthController {
             View::flash('error', 'Invalid request or passwords do not match (min 8 chars).');
             Router::redirect('/reset?token=' . $token);
         }
-        DB::update('bh_users', ['password' => Auth::hash($pass)], ['id' => $row->user_id]);
+        DB::update('bh_users', ['password' => Auth::hash($pass), 'login_fails' => 0, 'locked_until' => null], ['id' => $row->user_id]);
         DB::update('bh_password_resets', ['used' => 1], ['id' => $row->id]);
         View::flash('success', 'Password updated. Please log in.');
         Router::redirect('/login');
