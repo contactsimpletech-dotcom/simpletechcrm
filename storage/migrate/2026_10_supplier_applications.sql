@@ -1,0 +1,25 @@
+-- Supplier / corporate partner registration applications
+CREATE TABLE IF NOT EXISTS `bh_supplier_applications` (
+  `id`                  int unsigned       NOT NULL AUTO_INCREMENT,
+  `company_name`        varchar(255)       NOT NULL DEFAULT '',
+  `contact_name`        varchar(255)       NOT NULL DEFAULT '',
+  `email`               varchar(255)       NOT NULL DEFAULT '',
+  `phone`               varchar(80)        NOT NULL DEFAULT '',
+  `business_type`       varchar(100)       NOT NULL DEFAULT '',
+  `website`             varchar(255)       NOT NULL DEFAULT '',
+  `address`             text,
+  `city`                varchar(100)       NOT NULL DEFAULT '',
+  `state`               varchar(50)        NOT NULL DEFAULT '',
+  `zip`                 varchar(20)        NOT NULL DEFAULT '',
+  `tax_id`              varchar(50)        NOT NULL DEFAULT '',
+  `services_offered`    text,
+  `notes`               text,
+  `status`              enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+  `admin_notes`         text,
+  `ip_address`          varchar(45)        NOT NULL DEFAULT '',
+  `created_at`          datetime           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`          datetime           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `status` (`status`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
